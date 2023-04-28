@@ -1,3 +1,5 @@
+const AppError = require("../utils/AppError")
+
 class UsersController {
 /*
 // Um controler deve ter no máximo 5 métodos, podendo ter apenas um, ou dois, etc.
@@ -12,7 +14,11 @@ class UsersController {
   create(request, response) {
     const {name, email, password} = request.body;
 
-    response.json({name, email, password});
+    if(!name) {
+      throw new AppError("Insira o seu nome!");
+    }
+
+    response.status(201).json({name, email, password});
 }
 }
 
